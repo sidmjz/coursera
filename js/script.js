@@ -1,16 +1,6 @@
-// Closures
-function makeMultiplier (multiplier) {
-  function b() {
-    console.log("Multiplier is " + multiplier);
-  }
-  b();
-  return (
-    function (x) {
-      return multiplier * x;
-    }
-  );
-}
+(function () {
+  console.log("Hello Coursera!");
+  return 1;
+})();
 
-var doubleInput = makeMultiplier(2);
-console.log(doubleInput(10));
-
+console.log(a);
