@@ -22,14 +22,21 @@ function getRequestObject() {
 
 // Makes an Ajax GET request to 'requestUrl'
 ajaxUtils.sendGetRequest = 
-  function(requestUrl, responseHandler) {
+  function(requestUrl, responseHandler, isJsonResponse) {
     var request = getRequestObject();
     request.onreadystatechange = 
       function() {  
         // handleResponse(request, responseHandler); 
         // debugger;
         if (this.readyState === 4 && this.status === 200 ) {
-          responseHandler(this);
+          if (isJsonResponse === undefined)
+            isJsonResponse = true;
+
+          if (isJsonResponse) {
+            responseHandler(JSON.parse(this.responseText));
+          } else {
+            responseHandler(this.responseText); 
+          }
         }
       };
     request.open("GET", requestUrl, true);
