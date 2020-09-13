@@ -35,6 +35,18 @@ $(function () {
     return string;
   }
 
+  var switchMenuToActive = function () {
+    var classes = document.querySelector("#navHomeButton").className;
+    classes = classes.replace(new RegExp("active", "g"), "");
+    document.querySelector("#navHomeButton").className = classes;
+
+    classes = document.querySelector("#navMenuButton").className;
+    if (classes.indexOf("Active") === -1) {
+      classes += " active";
+      document.querySelector("#navMenuButton").className = classes;
+    }
+  };
+
   document.addEventListener("DOMContentLoaded", function (event) {
     showLoading("#main-content");
     $ajaxUtils.sendGetRequest (
@@ -58,7 +70,7 @@ $(function () {
     $ajaxUtils.sendGetRequest(
       categoriesTitleHtml,
       function (categoriesTitleHtml) {
-        // debugger;
+        switchMenuToActive();
         $ajaxUtils.sendGetRequest (
           categoryHtml,
           function (categoryHtml) {
@@ -101,6 +113,7 @@ $(function () {
     $ajaxUtils.sendGetRequest( 
       menuItemsTitleHtml,
       function (menuItemsTitleHtml) {
+        switchMenuToActive();
         $ajaxUtils.sendGetRequest(
           menuItemsHtml,
           function (menuItemsHtml) {
